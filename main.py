@@ -2,11 +2,11 @@ import os
 import cv2
 
 
-sample= cv2.imread("fgsample/edited/fingerprint2c.jpg")
+sample= cv2.imread("fingerprint2c.jpg")
 score = 0
 kp1,kp2,mp = None,None, None
 
-fp_image = cv2.imread("fgsample/real/fingerprint2.jpg")
+fp_image = cv2.imread("fingerprint2.jpg")
 sift = cv2.SIFT_create()                              # scale invariant feature transform (allows to extract key points from individual images)
 keypoints_1,descriptor_1 = sift.detectAndCompute(sample,None)
 keypoints_2,descriptor_2 = sift.detectAndCompute(fp_image,None)
@@ -29,5 +29,5 @@ if len(match_point)/keypoints *100 > score:
 print('match:{}%'.format(score))
 result = cv2.drawMatches(sample,kp1,fp_image,kp2,mp,None)
 result = cv2.resize(result,None,fx=1,fy=1)
-cv2.imread('finger_print_match',result)
+cv2.imshow('finger_print_match',result)
 cv2.waitKey(0)
